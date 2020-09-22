@@ -8,6 +8,7 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
+  serviceName: {{ include "..fullname" . }}
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
@@ -35,12 +36,16 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /opt/youtrack/data
+              subPath: data
             - name: conf
               mountPath: /opt/youtrack/conf
+              subPath: conf
             - name: logs
               mountPath: /opt/youtrack/logs
+              subPath: logs
             - name: backups
               mountPath: /opt/youtrack/backups
+              subPath: backups
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
