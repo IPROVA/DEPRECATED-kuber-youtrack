@@ -19,6 +19,10 @@ spec:
       labels:
         app.kubernetes.io/name: {{ include "..name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
+      {{- if .Values.podAnnotations }}
+      annotations:
+{{ toYaml .Values.podAnnotations | indent 8 }}
+      {{- end }}
     spec:
       securityContext:
         fsGroup: 13001

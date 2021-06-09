@@ -9,6 +9,8 @@ image:
   tag: 2019.1.51078
   pullPolicy: IfNotPresent
 
+podAnnotations: []
+
 nameOverride: ""
 fullnameOverride: ""
 
