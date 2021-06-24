@@ -24,13 +24,18 @@ spec:
 {{ toYaml .Values.podAnnotations | indent 8 }}
       {{- end }}
     spec:
+{{- if .Values.podSecurityContext }}
       securityContext:
-        fsGroup: 13001
-        runAsUser: 13001
+{{ toYaml .Values.podSecurityContext | indent 8 }}
+{{- end }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+{{- if .Values.securityContext }}
+          securityContext:
+{{ toYaml .Values.securityContext | indent 12 }}
+{{- end }}
           ports:
             - name: http
               containerPort: 8080
