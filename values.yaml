@@ -14,6 +14,15 @@ podAnnotations: []
 nameOverride: ""
 fullnameOverride: ""
 
+podSecurityContext:
+  fsGroup: 13001
+  runAsUser: 13001
+
+securityContext:
+  runAsUser: 13001
+  runAsNonRoot: true
+  allowPrivilegeEscalation: false
+
 service:
   type: ClusterIP
   port: 8080
